@@ -4,7 +4,7 @@
       <input type="text" v-model="clientInfo.name" placeholder="Ваше имя" />
       <input type="text" v-model="clientInfo.surname" placeholder="Ваша Фамилия" />
       <input type="mail" v-model="clientInfo.email" placeholder="Ваш email" />
-      <input type="text" :value="clientInfo.number" @input='change' placeholder="0555050505" />
+      <input type="text" :value="clientInfo.number" maxlength="10" @input='change' placeholder="0555050505" />
       <div>
         <input class='calc-form__input' type="number" placeholder="35см" v-model="clientInfo.packageInfo.width">
         <input class='calc-form__input' type="number" placeholder="35см" v-model="clientInfo.packageInfo.height">
@@ -45,8 +45,8 @@ export default {
       this.formReset()
     },
     change(e) {
-      let nums = e.target.value.replace(/[a-b]/g, '')
       this.clientInfo.number = e.target.value
+      this.clientInfo.number = this.clientInfo.number.replace(/[a-zA-Zа-яА-Я]/g, '')
     },
     formReset() {
       this.clientInfo.name = ''
